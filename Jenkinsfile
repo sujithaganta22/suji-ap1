@@ -1,12 +1,10 @@
 pipeline {
     agent any
     environment {
-          tomcat-dev = "172.31.29.121"
-          tomcat-user = "ec2-user"
+  TOMCAT_DEV = "172.31.29.121"
+  TOMCAT_USER = "ec2-user"
 }
-
-
-    stages {
+ stages {
         stage('Git Checkout') {
             steps {
                 git branch: 'main', credentialsId: 'github', url: 'https://github.com/sujithaganta22/suji-ap1'
@@ -22,9 +20,9 @@ pipeline {
                 steps{
                     sshagent(['tomcat-dev']) {
                         // copy war file ontpo tomcat server
-                        sh "scp -o StrictHostKeyChecking=no  target/*.war $tomcat-user@$tomcat-dev:/opt/tomcat9/webapps/ "
-                        sh "ssh $tomcat-user@$tomcat-dev /opt/tomcat9/bin/shutdown.sh"
-                        sh "ssh $tomcat-user@$tomcat-dev /opt/tomcat9/bin/startup.sh" 
+                        sh "scp -o StrictHostKeyChecking=no  target/*.war $TOMCAT_USER@$TOMCAT_DEV:/opt/tomcat9/webapps/ "
+                        sh "ssh $TOMCAT_USER @$TOMCAT_DEV  /opt/tomcat9/bin/shutdown.sh"
+                        sh "ssh $TOMCAT_USER @$TOMCAT_DEV  /opt/tomcat9/bin/startup.sh" 
                     }
                 }
             }

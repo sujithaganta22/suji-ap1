@@ -4,10 +4,14 @@ pipeline {
   TOMCAT_DEV = "172.31.29.121"
   TOMCAT_USER = "ec2-user"
 }
+    parameters {
+  string defaultValue: 'main', description: 'chose branch to build and deploy', name: 'branchname'
+}
+
  stages {
         stage('Git Checkout') {
             steps {
-                git branch: 'main', credentialsId: 'github', url: 'https://github.com/sujithaganta22/suji-ap1'
+                git branch: "${params.branchname}", credentialsId: 'github', url: 'https://github.com/sujithaganta22/suji-ap1'
             } 
         }    
             stage('Maven Build') {

@@ -1,8 +1,8 @@
 pipeline {
     agent any
     environment {
-  tomcat-dev = "172.31.29.121"
-  tomcat-user = "ec2-user"
+          tomcat-dev = "172.31.29.121"
+          tomcat-user = "ec2-user"
 }
 
 

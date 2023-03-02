@@ -11,7 +11,9 @@ pipeline {
  stages {
         stage('Git Checkout') {
             when {
+                expression{
                 params.branchname == "develop"
+                }
             }
              steps {
                 git branch: "${params.branchname}", credentialsId: 'github', url: 'https://github.com/sujithaganta22/suji-ap1'
@@ -19,8 +21,10 @@ pipeline {
         }    
             stage('Maven Build') {
                  when {
+                     expression{
                 params.branchname == "develop"
             }
+                 }
                 steps {
                    sh 'mvn clean package'
             
@@ -28,8 +32,10 @@ pipeline {
             }
             stage("Dev Deploy"){
                  when {
+                     expression{
                 params.branchname == "develop"
             }
+                 }
                 steps{
                     sshagent(['tomcat-dev']) {
                         // copy war file ontpo tomcat server

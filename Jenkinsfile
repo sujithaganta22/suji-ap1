@@ -32,4 +32,13 @@ pipeline {
             }
             
     }
+    post {
+  success {
+      echo "job successed,sending sucess email"
+  }
+  failure {
+    echo "job failed, sending failure email"
+  }
+}
+
 }

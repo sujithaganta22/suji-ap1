@@ -1,5 +1,10 @@
 pipeline {
     agent any
+    environment {
+  tomcat-dev = "172.31.29.121"
+  tomcat-user = "ec2-user"
+}
+
 
     stages {
         stage('Git Checkout') {
@@ -17,9 +22,9 @@ pipeline {
                 steps{
                     sshagent(['tomcat-dev']) {
                         // copy war file ontpo tomcat server
-                        sh "scp -o StrictHostKeyChecking=no  target/*.war ec2-user@172.31.29.121:/opt/tomcat9/webapps/ "
-                        sh "ssh ec2-user@172.31.29.121 /opt/tomcat9/bin/shutdown.sh"
-                        sh "ssh ec2-user@172.31.29.121 /opt/tomcat9/bin/startup.sh" 
+                        sh "scp -o StrictHostKeyChecking=no  target/*.war $tomcat-user@$tomcat-dev:/opt/tomcat9/webapps/ "
+                        sh "ssh $tomcat-user@$tomcat-dev /opt/tomcat9/bin/shutdown.sh"
+                        sh "ssh $tomcat-user@$tomcat-dev /opt/tomcat9/bin/startup.sh" 
                     }
                 }
             }

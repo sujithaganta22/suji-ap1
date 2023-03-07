@@ -7,7 +7,7 @@ pipeline {
                 branch 'develop'
             }
             steps {
-                echo 'Hello World'
+                echo 'maven build'
             }
         }
         stage('Dev Deploy') {
@@ -15,7 +15,7 @@ pipeline {
                 branch 'develop'
             }
             steps {
-                echo 'Hello World'
+                echo 'dev deploy'
             }
         }
       stage('Test Deploy') {
@@ -23,7 +23,7 @@ pipeline {
                 branch 'test'
             }
             steps {
-                echo 'Hello World'
+                echo 'test deploy'
             }
         }
       stage('Uat Deploy') {
@@ -31,7 +31,7 @@ pipeline {
                 branch 'uat'
             }
             steps {
-                echo 'Hello World'
+                echo 'uat depploy'
             }
         }
     }
